@@ -6,8 +6,7 @@
         <span>成易润通</span>
       </div>
       <div class="vip_login">
-        <i></i>
-        <span>会员登录</span>
+        <span>hi~{{userName}}</span>
       </div>
     </header>
     <main>
@@ -37,27 +36,83 @@
         </ul>
       </div>
       <ul class="resource">
-        <li>
+        <li v-for="(item,index) in resource" :key="index">
           <div class="resource_title">
-            <span><i></i>银卡资源</span>
+            <span><i></i>{{item.le_name}}资源</span>
             <span>更多</span>
           </div>
-          <div class="register">注册银卡会员</div>
+          <div class="register">注册{{item.le_name}}</div>
           <div class="resource_bottom">
-            <span>365元/年</span>
-            <span>每天可以获得<i>1</i>个资源</span>
-            <button>立即注册</button>
+            <span>{{item.le_money*100}}元/年</span>
+            <span>每{{item.le_interval}}天可以获得<i>{{item.le_number}}</i>个资源</span>
+            <button>立即购买</button>
           </div>
         </li>
       </ul>
+      <div class="introduce">
+        <h3><i></i>平台介绍</h3>
+        <p>
+          目前全球分享经济呈快速发展态势，是拉动经济增长的新
+          路子，通过分享协作方式搞创业创新，门槛更低、成本更小、
+          速度更快。双创是收入分配模式的创新，分享经济—直销的精
+          髓重在分享，本平台致力于解决直销人的最大难题，今天直销
+          没做好，主要因为人脉少，拥有庞大的人脉资源，才会使你的
+          管道收入更加稳固长久。人脉多少决定成与败，人脉优劣决定
+          快与慢，每天只需 块钱，海量优质客户资源任你拿。选择成
+          易润通，成功路上更轻松！！！
+        </p>
+      </div>
     </main>
   </div>
 </template>
-
 <script>
+  import {get_userInfo} from '@/api/getUserInfo'
+  import {getVip_info} from '@/api/get_home_data'
+  import cookie from 'js-cookie'
+
   export default {
     data() {
-      return {}
+      return {
+        userName: '',
+        resource: [],
+      }
+    },
+    created() {
+      this.get_userData();
+      this.getInitData();
+      if (cookie.get('userInfo')) {
+      } else {
+        let userData = {
+          hy_openid: '13212312312122331126',
+          hy_touxiang: 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLMfGkPSB6nMhxJdV6KEkUTibyUNQVIBpZ9FPh4AoHYBhHSZ46G8jCtZVYZ1541d56cLZeMrdVNUyg/132'
+        };
+        cookie.set('userInfo', userData)
+      }
+    },
+    methods: {
+      get_userData() {
+        let userData = {
+          hy_openid: '13212312312122331126',
+          hy_touxiang: 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLMfGkPSB6nMhxJdV6KEkUTibyUNQVIBpZ9FPh4AoHYBhHSZ46G8jCtZVYZ1541d56cLZeMrdVNUyg/132'
+        };
+        get_userInfo(userData).then(res => {
+          this.userName = res.hy_nicheng;
+          console.log(res);
+        })
+      },
+      getInitData() {
+        let infoData = JSON.parse(cookie.get('userInfo'));
+        let vip_info_data = {
+          hy_openid: infoData.hy_openid,
+          hy_touxiang: infoData.hy_touxiang,
+          hy_nicheng: '大傻子',
+          hy_sex: 1
+        };
+        getVip_info(vip_info_data).then(res => {
+          console.log(res);
+          this.resource = res;
+        })
+      }
     }
   }
 </script>
@@ -85,133 +140,147 @@
         }
       }
       .vip_login {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 1.2rem;
-        height: .3rem;
-        border-radius: .3rem;
-        font-size: .3em;
-        color: #fff;
-        background-color: #e5322d;
-        padding: .1rem .2rem;
-        i {
-          display: inline-block;
-          width: .2rem;
-          height: .2rem;
-          background: url("../../assets/images/vip.png") no-repeat;
-          background-size: 100% 100%;
-        }
+       span{
+         display: inline-block;
+         color:#1b61ff;
+         width:85px;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+       }
       }
-    }
-    main {
-      .banner {
-        padding: .24rem .24rem .5rem;
-        background-color: #fff;
-        img {
-          width: 100%;
-          height: auto;
-          border-radius: .1rem;
-          margin-bottom: .2rem;
-        }
-        .advertising {
-          i {
-            display: inline-block;
-            width: .4rem;
-            height: .45rem;
-            background: url("../../assets/images/trumpent.png") no-repeat;
-            background-size: 100% 100%;
-            margin: 0 .1rem;
+      }
+      main {
+        .banner {
+          padding: .24rem .24rem .5rem;
+          background-color: #fff;
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: .1rem;
+            margin-bottom: .2rem;
           }
-          span {
-            font-size: .2em;
+          .advertising {
             i {
               display: inline-block;
-              width: .17rem;
-              height: .18rem;
-              background: url("../../assets/images/arrows.png") no-repeat;
+              width: .4rem;
+              height: .45rem;
+              background: url("../../assets/images/trumpent.png") no-repeat;
               background-size: 100% 100%;
-            }
-          }
-        }
-        ul {
-          display: flex;
-          justify-content: space-around;
-          margin-top: .55rem;
-          li {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            img {
-              width: 50%;
-              height: 50%;
+              margin: 0 .1rem;
             }
             span {
-              font-size: .3rem;
-            }
-          }
-        }
-      }
-      .resource {
-        background-color: #fff;
-        margin-top: 15px;
-        padding: .25rem .24rem .3rem;
-        font-size:.8em;
-        color:#000;
-        li {
-          .resource_title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            span {
-              color: #b6b6b6;
-            }
-            span:first-child {
-              font-size: 1.3em;
-              font-weight: 600;
-              color: #2d3142;
+              font-size: .2em;
               i {
                 display: inline-block;
-                width: .08rem;
-                height: .25rem;
-                background: #212121;
-                margin-right: .05rem;
+                width: .17rem;
+                height: .18rem;
+                background: url("../../assets/images/arrows.png") no-repeat;
+                background-size: 100% 100%;
               }
             }
           }
-          .register {
-            margin:.55rem 0 .4rem;
-          }
-          .resource_bottom{
+          ul {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            span:first-child{
-              color:#fe5730;
-              font-size:1.5em;
-              padding-bottom:.25rem;
-            }
-            span:nth-child(2){
-              i{
-                color:#fe5730;
+            justify-content: space-around;
+            margin-top: .55rem;
+            li {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              img {
+                width: 50%;
+                height: 50%;
+              }
+              span {
+                font-size: .3rem;
               }
             }
-            button{
-              background-color:#1b61ff;
-              box-shadow: none;
-              border:none;
-              padding:.1rem .15rem;
-              border-radius:.05rem;
-              color:#fff;
+          }
+        }
+        .resource {
+          font-size: .8em;
+          color: #000;
+          li {
+            background-color: #fff;
+            margin-top: 15px;
+            padding: .25rem .24rem .3rem;
+            .resource_title {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              span {
+                color: #b6b6b6;
+              }
+              span:first-child {
+                font-size: 1.3em;
+                font-weight: 600;
+                color: #2d3142;
+                i {
+                  display: inline-block;
+                  width: .08rem;
+                  height: .25rem;
+                  background: #212121;
+                  margin-right: .05rem;
+                }
+              }
             }
-            button:focus{
-              border:none;
-              outline: none;
+            .register {
+              margin: .55rem 0 .4rem;
             }
+            .resource_bottom {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              span:first-child {
+                color: #fe5730;
+                font-size: 1.5em;
+                padding-bottom: .25rem;
+              }
+              span:nth-child(2) {
+                i {
+                  color: #fe5730;
+                }
+              }
+              button {
+                background-color: #1b61ff;
+                box-shadow: none;
+                border: none;
+                padding: .1rem .15rem;
+                border-radius: .05rem;
+                color: #fff;
+              }
+              button:focus {
+                border: none;
+                outline: none;
+              }
+            }
+          }
+        }
+        .introduce {
+          padding: .25rem .25rem .45rem;
+          h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2d3142;
+            i {
+              display: inline-block;
+              width: .08rem;
+              height: .3rem;
+              background: #212121;
+              margin-right: .05rem;
+            }
+          }
+          p {
+            text-align: justify;
+            text-indent: 1.8em;
+            margin-top: .3rem;
+            font-size: .8em;
+            color: #2d3142;
+            line-height: 1.5em;
           }
         }
       }
     }
-  }
 </style>

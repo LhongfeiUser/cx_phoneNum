@@ -36,12 +36,17 @@
         active:'home',
       }
     },
-    components:{Home}
+    components:{Home},
+    created(){
+      console.log(this.$route);
+      /*window.location.href('https://open.weixin.qq.com/connect/oauth2/authorize?appid='+$appid+'&redirect_uri='.urlencode(this.$reuter)+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect')*/
+    }
   }
 </script>
 
 <style scoped lang="scss">
 .app{
   color:#333;
+  padding-bottom:1.2rem;
 }
 </style>
