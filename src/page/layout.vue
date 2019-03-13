@@ -1,16 +1,6 @@
 <template>
   <div class="app">
-    <mt-tab-container v-model="active">
-      <mt-tab-container-item id="home">
-        <Home></Home>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="discover">
-        <mt-cell v-for="n in 5" title="tab-container 2"></mt-cell>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="user">
-        <mt-cell v-for="n in 7" title="tab-container 3"></mt-cell>
-      </mt-tab-container-item>
-    </mt-tab-container>
+    <router-view></router-view>
     <mt-tabbar v-model="active" :fixed="true">
       <mt-tab-item id="home">
         <img slot="icon" src="../assets/images/home.png">
@@ -30,15 +20,23 @@
 
 <script>
   import Home from '@/page/home/index'
+  import Discover from '@/page/discover/index'
+  import User from '@/page/user/index'
   export default {
     data(){
       return{
-        active:'home',
+        active:'',
       }
     },
-    components:{Home},
+    components:{Home,Discover,User},
+    watch: {
+      active: function (val, oldVal) {
+        if(val==='home')this.$router.push('/home');
+        if(val==='discover')this.$router.push('/discover');
+        if(val==='user')this.$router.push('/user');
+      }
+    },
     created(){
-      console.log(this.$route);
       /*window.location.href('https://open.weixin.qq.com/connect/oauth2/authorize?appid='+$appid+'&redirect_uri='.urlencode(this.$reuter)+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect')*/
     }
   }

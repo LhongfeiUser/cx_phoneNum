@@ -12,12 +12,26 @@ export default new Router({
       component: layout,
       children:[
         {
-          path:'',
-          name:'home',
-          component: ()=>import('@/page/home/index')
-        }
+          path: 'home',
+          name: 'home',
+          component: ()=>import('@/page/home/index'),
+        },
+        {
+          path: 'discover',
+          name: 'discover',
+          component: ()=>import('@/page/discover/index'),
+        },
+        {
+          path: 'user',
+          name: 'user',
+          component: ()=>import('@/page/user/index'),
+        },
+        {
+          path: '/discover/detail/:id',
+          name: 'detail',
+          component: ()=>import('@/page/discover_detail/index'),
+        },
       ]
     },
-    {path: '*', redirect: '/home', hidden: true},
   ]
 })

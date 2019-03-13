@@ -7,7 +7,9 @@ import 'mint-ui/lib/style.css'
 import './assets/css/reset.css'
 import './assets/js/rem'
 import 'jquery'
+//axios.defaults.withCredentials = true;
 import Mint from 'mint-ui';
+
 Vue.use(Mint);
 Vue.config.productionTip = false;
 /* eslint-disable no-new */

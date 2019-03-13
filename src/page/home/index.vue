@@ -43,7 +43,7 @@
           </div>
           <div class="register">注册{{item.le_name}}</div>
           <div class="resource_bottom">
-            <span>{{item.le_money*100}}元/年</span>
+            <span>{{item.le_money}}元/年</span>
             <span>每{{item.le_interval}}天可以获得<i>{{item.le_number}}</i>个资源</span>
             <button>立即购买</button>
           </div>
@@ -78,8 +78,6 @@
       }
     },
     created() {
-      this.get_userData();
-      this.getInitData();
       if (cookie.get('userInfo')) {
       } else {
         let userData = {
@@ -88,6 +86,8 @@
         };
         cookie.set('userInfo', userData)
       }
+      this.get_userData();
+      this.getInitData();
     },
     methods: {
       get_userData() {
@@ -97,7 +97,6 @@
         };
         get_userInfo(userData).then(res => {
           this.userName = res.hy_nicheng;
-          console.log(res);
         })
       },
       getInitData() {
@@ -105,11 +104,10 @@
         let vip_info_data = {
           hy_openid: infoData.hy_openid,
           hy_touxiang: infoData.hy_touxiang,
-          hy_nicheng: '大傻子',
+          hy_nicheng: '',
           hy_sex: 1
         };
         getVip_info(vip_info_data).then(res => {
-          console.log(res);
           this.resource = res;
         })
       }
@@ -216,12 +214,12 @@
               span:first-child {
                 font-size: 1.3em;
                 font-weight: 600;
-                color: #2d3142;
+                color: #555;
                 i {
                   display: inline-block;
                   width: .08rem;
                   height: .25rem;
-                  background: #212121;
+                  background: #555;
                   margin-right: .05rem;
                 }
               }
@@ -261,14 +259,14 @@
         .introduce {
           padding: .25rem .25rem .45rem;
           h3 {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: 600;
-            color: #2d3142;
+            color: #555;
             i {
               display: inline-block;
               width: .08rem;
               height: .3rem;
-              background: #212121;
+              background: #555;
               margin-right: .05rem;
             }
           }

@@ -1,15 +1,14 @@
 import axios from 'axios'
 import qs from 'qs'
-
+axios.defaults.withCredentials = true;
 const service =axios.create({
   baseURL:process.env.NODE_ENV,
   timeout:3000
 });
-
 service.interceptors.request.use(config => {
+  config.headers['X-Requested-With'] = 'xmlhttprequest';
   if(config.method==='post'){
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-    config.headers['X-Requested-With'] = 'xmlhttprequest';
     if(config.data instanceof FormData){
       config.headers['Content-Type'] = 'multipart/form-data;boundary';
     }else {
