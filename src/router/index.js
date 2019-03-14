@@ -22,16 +22,36 @@ export default new Router({
           component: ()=>import('@/page/discover/index'),
         },
         {
+          path: '/discover/detail/:id',
+          name: 'detail',
+          component: ()=>import('@/page/discover_detail/index'),
+        },
+        {
           path: 'user',
           name: 'user',
           component: ()=>import('@/page/user/index'),
         },
         {
-          path: '/discover/detail/:id',
-          name: 'detail',
-          component: ()=>import('@/page/discover_detail/index'),
+          path:'/user/inform',
+          name:'inform',
+          component:()=>import('@/page/inform/index')
+        },
+        {
+          path:'/user/inform/detail/:id',
+          name:'inform_detail',
+          component:()=>import('@/page/inform_detail/index')
+        },
+        {
+          path:'/user/perfect_info',
+          name:'perfect_info',
+          component:()=>import('@/page/perfect_info/index')
         },
       ]
+    },
+    {
+      path:'/share',
+      name:'share',
+      component:()=>import('@/page/share/index')
     },
   ]
 })

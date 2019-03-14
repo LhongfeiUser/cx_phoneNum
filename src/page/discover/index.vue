@@ -124,16 +124,16 @@
        h3.title{
          font-size:.9em;
          font-weight: 600;
-         color:#000;
+         color:#555;
          margin-bottom:.2rem;
-         border-left:5px solid #000;
+         border-left:5px solid red;
          padding-left:.1rem;
          overflow: hidden;
          text-overflow:ellipsis;
          white-space:nowrap;
        }
        p{
-         font-size:.6em;
+         font-size:.8em;
          line-height: .4rem;
          text-align: justify;
          display:-webkit-box;

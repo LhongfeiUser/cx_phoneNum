@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <header>
+    <div class="header">
       <div class="logo">
         <img src="../../assets/images/logo.png" alt="">
         <span>成易润通</span>
@@ -8,7 +8,7 @@
       <div class="vip_login">
         <span>hi~{{userName}}</span>
       </div>
-    </header>
+    </div>
     <main>
       <div class="banner">
         <img src="../../assets/images/banner.jpg" alt="">
@@ -18,21 +18,23 @@
         </div>
         <ul>
           <li>
-            <img src="../../assets/images/icon_01.png" alt="">
+            <img src="../../assets/images/icon_01.png">
             <span>注册礼包</span>
           </li>
           <li>
-            <img src="../../assets/images/icon_02.png" alt="">
+            <img src="../../assets/images/icon_02.png">
             <span>热门咨询</span>
           </li>
           <li>
-            <img src="../../assets/images/icon_03.png" alt="">
+            <img src="../../assets/images/icon_03.png">
             <span>安全资源</span>
           </li>
-          <li>
-            <img src="../../assets/images/icon_04.png" alt="">
-            <span>推荐分享</span>
-          </li>
+          <router-link to="/share">
+            <li>
+              <img src="../../assets/images/icon_04.png">
+              <span>推荐分享</span>
+            </li>
+          </router-link>
         </ul>
       </div>
       <ul class="resource">
@@ -117,7 +119,7 @@
 
 <style scoped lang="scss">
   .home {
-    header {
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;

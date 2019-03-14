@@ -1,6 +1,11 @@
 <template>
     <div class="detail">
-      <header>
+      <mt-header fixed title="新闻详情">
+        <router-link to="/discover" slot="left">
+          <mt-button icon="back">返回</mt-button>
+        </router-link>
+      </mt-header>
+      <div class="header">
         <div class="logo">
           <img src="../../assets/images/logo.png" alt="">
           <span>成易润通</span>
@@ -8,7 +13,7 @@
         <div class="vip_login">
           <span>hi~亮泽呀</span>
         </div>
-      </header>
+      </div>
       <main>
         <div class="nav_banner">
           <ul>
@@ -69,12 +74,13 @@
 <style scoped lang="scss">
   .detail{
     min-height:100vh;
-    header {
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       padding: .24rem .24rem .35rem;
       background-color: #fff;
+      margin-top:40px;
       .logo {
         display: flex;
         align-items: center;
