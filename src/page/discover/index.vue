@@ -30,14 +30,10 @@
             </li>
           </ul>
         </div>
-        <div class="news_module" v-for="i in 6" @click="goDetail(i)">
-          <h3 class="title">6.2{{i}} 注册成易润通会员,成功路上更轻松,查看详情！</h3>
+        <div class="news_module" v-for="(item,index) in news_list" @click="goDetail(item.id)" :key="index">
+          <h3 class="title">{{item.title}}</h3>
           <p>
-            我们还可以考虑到系统的“跨行销售”和“上游销售”。这个要素对于
-            消费者行为的各个角度来说都是有效的。营销需要综合考虑各个时间消
-            费者行为的其他角度。我们还可以考虑到系统的“跨行销售”和
-            消费者行为的各个角度来说都是有效的。营销需要综合考虑各个时间消
-            费者行为的其他角度。
+            {{item.description}}
           </p>
         </div>
       </main>
@@ -45,13 +41,26 @@
 </template>
 
 <script>
-    export default {
+  import cookie from 'js-cookie';
+  import {get_discover} from "../../api/discover";
+
+  export default {
       data(){
         return{
-
+          news_list:'',
         }
       },
+    created(){
+      this.get_list()
+    },
       methods:{
+        get_list(){
+          let discover_data ={};
+          get_discover(discover_data).then(res=>{
+            console.log(res);
+            this.news_list=res;
+          })
+        },
         goDetail(i){
           this.$router.push('/discover/detail/'+i)
         }

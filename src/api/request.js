@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import cookie from 'js-cookie'
 axios.defaults.withCredentials = true;
 const service =axios.create({
   baseURL:process.env.NODE_ENV,
@@ -9,6 +10,8 @@ service.interceptors.request.use(config => {
   config.headers['X-Requested-With'] = 'xmlhttprequest';
   if(config.method==='post'){
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    config.data.hy_openid=JSON.parse(cookie.get('userInfo')).hy_openid;
+    config.data.hy_touxiang=JSON.parse(cookie.get('userInfo')).hy_touxiang;
     if(config.data instanceof FormData){
       config.headers['Content-Type'] = 'multipart/form-data;boundary';
     }else {
@@ -16,6 +19,8 @@ service.interceptors.request.use(config => {
     }
   }else {
     config.params = {...config.params};
+    config.params.hy_openid=JSON.parse(cookie.get('userInfo')).hy_openid;
+    config.params.hy_touxiang=JSON.parse(cookie.get('userInfo')).hy_touxiang;
   }
   return config;
 }, error => {  //请求错误处理

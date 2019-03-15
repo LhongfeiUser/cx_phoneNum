@@ -102,10 +102,7 @@
         })
       },
       getInitData() {
-        let infoData = JSON.parse(cookie.get('userInfo'));
         let vip_info_data = {
-          hy_openid: infoData.hy_openid,
-          hy_touxiang: infoData.hy_touxiang,
           hy_nicheng: '',
           hy_sex: 1
         };

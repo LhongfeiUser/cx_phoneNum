@@ -86,8 +86,10 @@
    }
    .bottom_content{
      position: absolute;
-     left:10%;
+     bottom:1rem;
+     left:5%;
      width:80%;
+     line-height: .5rem;
      border-radius:10px;
      background-color:#d92a00;
      color:#fff;

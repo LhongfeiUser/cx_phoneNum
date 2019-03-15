@@ -38,7 +38,7 @@
           </mt-cell>
         </div>
         <div class="about_us">
-          <mt-cell title="关于" is-link="">
+          <mt-cell title="关于" is-link to="/user/about">
             <img slot="icon" src="../../assets/images/icon_about.png" width="24" height="24">
           </mt-cell>
           <mt-cell title="帮助中心" is-link="">
@@ -77,8 +77,7 @@
           },
 
         tj(){
-          get_picyzm({captcha:this.param_data,hy_openid:JSON.parse(cookie.get('userInfo')).hy_openid,
-            hy_touxiang:JSON.parse(cookie.get('userInfo')).hy_touxiang,}).then(res=>{
+          get_picyzm({captcha:this.param_data}).then(res=>{
             console.log(res);
           })
         }

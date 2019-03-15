@@ -46,6 +46,11 @@ export default new Router({
           name:'perfect_info',
           component:()=>import('@/page/perfect_info/index')
         },
+        {
+          path:'/user/about',
+          name:'about',
+          component:()=>import('@/page/about/index')
+        },
       ]
     },
     {

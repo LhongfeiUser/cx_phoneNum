@@ -7,7 +7,8 @@ import 'mint-ui/lib/style.css'
 import './assets/css/reset.css'
 import './assets/js/rem'
 import 'jquery'
-//axios.defaults.withCredentials = true;
+import { InfiniteScroll } from 'mint-ui';
+Vue.use(InfiniteScroll);
 import Mint from 'mint-ui';
 
 Vue.use(Mint);
