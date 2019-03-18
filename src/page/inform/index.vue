@@ -6,18 +6,15 @@
       </router-link>
     </mt-header>
     <mt-loadmore :bottom-method="loadBottomUse"
-                 :bottom-all-loaded="allLoaded"
                  :bottomPullText='bottomText'
+                 :bottom-all-loaded="allLoaded"
+                 :auto-fill=false
                  ref="loadmore">
       <ul class="inform_list">
-        <li v-for="i in 6" :key="i" @click="to_detail(i)">
-          <h3>【通知】</h3>
-          <p>
-            我们还可以考虑到系统的“跨行销售”和“上游销售”。这个要素对于
-            消费者行为的各个角度来说都是有效的。营销需要综合考虑各个时间消
-            费者行为的其他角度。
-          </p>
-          <span>2019-03-08   13:0{{i}}</span>
+        <li v-for="(item,index) in getScoreLog" :key="index" @click="to_detail(item.zn_id)">
+          <h3>【{{item.zn_title}}】</h3>
+          <p>{{item.zn_content}}</p>
+          <span>{{item.zn_creattime}}</span>
         </li>
       </ul>
     </mt-loadmore>
@@ -26,6 +23,7 @@
 
 <script>
   import {get_inform} from "../../api/user";
+  import {formatDate} from "../../assets/js/dateTime";
 
   export default {
     data() {
@@ -33,8 +31,7 @@
         getScoreLog: [],
         pageNo: 1,
         allLoaded: false,
-        bottomText: '上拉加载更多...',
-        totalCount: '',
+        bottomText: '上拉加载数据...',
       }
     },
     created(){
@@ -42,11 +39,15 @@
     },
     methods: {
       inform_list(pageNo) {
-        get_inform({page: pageNo}).then(res => {
-          /*if (res.length === 0) {
-            this.allLoaded = true;
-          }*/
-          console.log(res);
+        get_inform({page: pageNo}).then( res => {
+           res.forEach((item,index)=>{
+            let d =new Date(item.zn_creattime);
+            item.zn_creattime=formatDate(d)
+          });
+          if(res.length===0){
+            this.allLoaded = true;// 若数据已全部获取完毕
+          }
+          this.getScoreLog=this.getScoreLog.concat(res);
         })
       },
       to_detail(item) {
@@ -54,13 +55,10 @@
       },
       loadBottomUse() {
         this.pageNo += 1;
-       /* if (this.pageNo === this.totalGetCount) {
-          this.allLoaded = true;
-        }*/
-        console.log(this.pageNo);
-        setTimeout(() => {
+        setTimeout(()=>{
+          this.$refs.loadmore.onBottomLoaded();
           this.inform_list(this.pageNo)
-        }, 1500);
+        },1500);
       },
     }
   }
@@ -80,7 +78,6 @@
         margin-bottom: .2rem;
       }
       p {
-        display: -webkit-box;
         overflow: hidden;
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;

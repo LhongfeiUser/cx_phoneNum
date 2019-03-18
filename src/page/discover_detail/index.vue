@@ -58,7 +58,6 @@
       methods:{
         discover_detail(){
           get_discover_detail({id:this.$route.params.id}).then(res=>{
-            console.log(res);
             this.detail_list=res.data;
           })
         }

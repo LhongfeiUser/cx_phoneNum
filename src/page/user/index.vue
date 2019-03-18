@@ -33,7 +33,7 @@
           <mt-cell title="邀请好友" is-link>
             <img slot="icon" src="../../assets/images/icon_invition.png" width="24" height="24">
           </mt-cell>
-          <mt-cell title="完善个人信息" is-link to="/user/perfect_info">
+          <mt-cell title="修改个人信息" is-link to="/user/perfect_info">
             <img slot="icon" src="../../assets/images/perfect.png" width="24" height="24">
           </mt-cell>
         </div>
@@ -46,41 +46,20 @@
           </mt-cell>
         </div>
       </main>
-      <!--<img :src="url" @click="get_pic">
-      <input type="text" v-model="param_data">
-      <button @click="tj">提交</button>-->
     </div>
 </template>
 
 <script>
-  import {get_picyzm} from "../../api/user";
   import cookie from 'js-cookie'
   export default {
-        name: "index",
       data(){
           return{
-             url:'',
-            param_data:'',
           }
       },
       created(){
-          this.get_pic()
+
       },
       methods:{
-          get_pic(){
-            let pic_data={
-              hy_openid:JSON.parse(cookie.get('userInfo')).hy_openid,
-              hy_touxiang:JSON.parse(cookie.get('userInfo')).hy_touxiang,
-            };
-            let c= Math.random();
-            this.url=`http://192.168.1.142/api/index/picyzm?hy_openid=${pic_data.hy_openid}&hy_touxiang=${pic_data.hy_touxiang}&m=${c}`;
-          },
-
-        tj(){
-          get_picyzm({captcha:this.param_data}).then(res=>{
-            console.log(res);
-          })
-        }
       }
     }
 </script>
@@ -97,7 +76,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size:.4em;
+        font-size:.8em;
         img{
           width:.75rem;
           height:.75rem;
@@ -110,7 +89,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size:.4em;
+        font-size:.8em;
         .icon_img{
           display: inline-block;
           width:.65rem;

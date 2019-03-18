@@ -167,7 +167,7 @@
               margin: 0 .1rem;
             }
             span {
-              font-size: .2em;
+              font-size: .8em;
               i {
                 display: inline-block;
                 width: .17rem;

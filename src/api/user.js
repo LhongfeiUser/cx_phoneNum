@@ -17,3 +17,32 @@ export const get_inform=data=>{
     data,
   })
 };
+
+//通知详情
+export const get_inform_detail=data=>{
+  return service({
+    url:'api/user/zhannei_detail',
+    method:'post',
+    data,
+  })
+};
+
+//修改个人信息
+
+export const amend_info=data=>{
+  return service({
+    url:'api/user/massage_edit',
+    method:'post',
+    data,
+  })
+};
+
+// 关于我们
+
+export const getAbout_us=data=>{
+  return service({
+    url:'api/news/guanyuwomen',
+    method:'post',
+    data,
+  })
+};

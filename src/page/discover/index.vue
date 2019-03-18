@@ -30,12 +30,19 @@
             </li>
           </ul>
         </div>
-        <div class="news_module" v-for="(item,index) in news_list" @click="goDetail(item.id)" :key="index">
-          <h3 class="title">{{item.title}}</h3>
-          <p>
-            {{item.description}}
-          </p>
-        </div>
+        <mt-loadmore :bottom-method="loadBottomUse"
+                     :bottomPullText='bottomText'
+                     :bottom-all-loaded="allLoaded"
+                     :auto-fill=false
+                     ref="loadmore">
+          <div class="news_module" v-for="(item,index) in news_list" @click="goDetail(item.id)" :key="index">
+            <h3 class="title">{{item.title}}</h3>
+            <p>
+              {{item.description}}
+            </p>
+          </div>
+        </mt-loadmore>
+
       </main>
     </div>
 </template>
@@ -43,27 +50,37 @@
 <script>
   import cookie from 'js-cookie';
   import {get_discover} from "../../api/discover";
-
   export default {
       data(){
         return{
-          news_list:'',
+          news_list:[],
+          pageNo: 1,
+          allLoaded: false,
+          bottomText: '上拉加载数据...',
         }
       },
     created(){
-      this.get_list()
+      this.get_list(1)
     },
       methods:{
-        get_list(){
-          let discover_data ={};
-          get_discover(discover_data).then(res=>{
-            console.log(res);
-            this.news_list=res;
+        get_list(pageNo){
+          get_discover({page:pageNo}).then(res=>{
+            if(res.length===0){
+              this.allLoaded = true;// 若数据已全部获取完毕
+            }
+            this.news_list=this.news_list.concat(res);
           })
         },
         goDetail(i){
           this.$router.push('/discover/detail/'+i)
-        }
+        },
+        loadBottomUse() {
+          this.pageNo += 1;
+          setTimeout(()=>{
+            this.$refs.loadmore.onBottomLoaded();
+            this.get_list(this.pageNo)
+          },1500);
+        },
       }
     }
 </script>
