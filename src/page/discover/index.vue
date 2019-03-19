@@ -24,10 +24,12 @@
               <img src="../../assets/images/icon_03.png" alt="">
               <span>安全资源</span>
             </li>
-            <li>
-              <img src="../../assets/images/icon_04.png" alt="">
-              <span>推荐分享</span>
-            </li>
+            <router-link to="/share">
+              <li>
+                <img src="../../assets/images/icon_04.png">
+                <span>推荐分享</span>
+              </li>
+            </router-link>
           </ul>
         </div>
         <mt-loadmore :bottom-method="loadBottomUse"
@@ -152,7 +154,7 @@
          font-weight: 600;
          color:#555;
          margin-bottom:.2rem;
-         border-left:5px solid red;
+         border-left:5px solid #ed4014;
          padding-left:.1rem;
          overflow: hidden;
          text-overflow:ellipsis;
@@ -168,6 +170,7 @@
          -webkit-box-orient:vertical;
          -webkit-line-clamp: 3;
          text-indent:.25rem;
+         color:#515a6e;
        }
      }
    }

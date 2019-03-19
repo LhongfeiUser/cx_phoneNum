@@ -7,20 +7,21 @@
     </mt-header>
     <main>
       <div class="form_data">
-        <mt-field label="用户名" placeholder="请输入用户名" v-model="userName"></mt-field>
+        <mt-field label="昵称" placeholder="请输入昵称" v-model="userName"></mt-field>
         <mt-field label="性别" placeholder="请输入性别" v-model="sex"></mt-field>
+        <mt-field label="邮箱" placeholder="请输入邮箱" type="email" v-model="userEmail"></mt-field>
+        <mt-field label="手机号" placeholder="请输入手机号" v-model="telPhone" type="tel"></mt-field>
         <div class="verify_pic">
-          <div class="verify_label">验证码</div>
+          <div class="verify_label">图片验证码</div>
           <div class="verify_input">
             <input type="text" v-model="param_data" placeholder="请输入验证码">
             <img :src="url" @click="get_pic">
           </div>
         </div>
-        <mt-field label="手机号" placeholder="请输入手机号" v-model="telPhone" type="tel">
+        <mt-field label="短信验证码" placeholder="请输入收到的验证码" v-model="telPhone" type="tel">
           <span v-if="isCode" @click="get_authCode">获取验证码</span>
           <span v-if="!isCode" style="color:#888;">重新获取({{timer}})</span>
         </mt-field>
-        <mt-field label="邮箱" placeholder="请输入邮箱" type="email" v-model="userEmail"></mt-field>
         <mt-button type="danger" size="large" @click.native="verify_pic">确认提交</mt-button>
       </div>
     </main>
@@ -34,7 +35,7 @@
   export default {
     data() {
       return {
-        url: '',
+        url: process.env.NODE_ENV,
         param_data: '',
         userName: '',
         telPhone: '',
@@ -50,27 +51,36 @@
     methods: {
       get_pic() {
         let pic_data = {
-          hy_openid: JSON.parse(cookie.get('userInfo')).hy_openid,
-          hy_touxiang: JSON.parse(cookie.get('userInfo')).hy_touxiang,
+          hy_openid: '13212312312122331126', //JSON.parse(cookie.get('userInfo')).hy_openid,
+          hy_touxiang: 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLMfGkPSB6nMhxJdV6KEkUTibyUNQVIBpZ9FPh4AoHYBhHSZ46G8jCtZVYZ1541d56cLZeMrdVNUyg/132', //JSON.parse(cookie.get('userInfo')).hy_touxiang,
         };
         let c = Math.random();
-        this.url = `http://192.168.1.142/api/index/picyzm?hy_openid=${pic_data.hy_openid}&hy_touxiang=${pic_data.hy_touxiang}&m=${c}`;
+        this.url = this.url + `/api/index/picyzm?hy_openid=${pic_data.hy_openid}&hy_touxiang=${pic_data.hy_touxiang}&m=${c}`;
       },
       verify_pic() {
-        get_picyzm({captcha: this.param_data}).then(res => {
-          if (res.code === 1) {
-            let _info = {};
-            amend_info(_info).then(res => {
-              console.log(res);
-            })
-          }
-        })
       },
       get_authCode() {
-        this.isCode = false;
-        let _timer = setInterval(() => {
-          this.d_timer(_timer);
-        }, 1000);
+        let c = {
+          captcha: this.param_data,
+          hy_openid: '13212312312122331126',
+          hy_touxiang: 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLMfGkPSB6nMhxJdV6KEkUTibyUNQVIBpZ9FPh4AoHYBhHSZ46G8jCtZVYZ1541d56cLZeMrdVNUyg/132'
+        };
+        get_picyzm(c).then(res => {
+          if (res.code === 1) {
+            this.$toast('手机验证码已发送');
+            this.isCode = false;
+            let _timer = setInterval(() => {
+              this.d_timer(_timer);
+            }, 1000);
+            /* let _info = {};
+             amend_info(_info).then(res => {
+               console.log(res);
+             })*/
+          } else {
+            this.$toast('验证失败');
+            this.get_pic();
+          }
+        })
       },
       d_timer(_timer) {
         this.timer--;
@@ -86,7 +96,7 @@
 
 <style scoped lang="scss">
   .perfect_info {
-    min-height: 100vh;
+    min-height: 100%;
     background-color: #fff;
   }
 

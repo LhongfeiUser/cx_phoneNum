@@ -129,7 +129,7 @@
         h3.title{
           font-size:.9em;
           font-weight: 600;
-          color:#555;
+          color:#17233d;
           margin-bottom:.2rem;
           border-left:5px solid red;
           padding-left:.1rem;

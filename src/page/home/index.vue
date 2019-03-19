@@ -47,7 +47,8 @@
           <div class="resource_bottom">
             <span>{{item.le_money}}元/年</span>
             <span>每{{item.le_interval}}天可以获得<i>{{item.le_number}}</i>个资源</span>
-            <button>立即购买</button>
+            <!--<button>立即购买</button>-->
+            <mt-button type="primary" size="small">立即购买</mt-button>
           </div>
         </li>
       </ul>
@@ -121,7 +122,7 @@
       justify-content: space-between;
       align-items: flex-end;
       padding: .24rem .24rem .35rem;
-      background-color: #fff;
+      background-color: #f8f8f9;
       .logo {
         display: flex;
         align-items: center;
@@ -150,7 +151,7 @@
       main {
         .banner {
           padding: .24rem .24rem .5rem;
-          background-color: #fff;
+          background-color: #f8f8f9;
           img {
             width: 100%;
             height: auto;
@@ -198,9 +199,9 @@
         }
         .resource {
           font-size: .8em;
-          color: #000;
+          color: #515a6e;
           li {
-            background-color: #fff;
+            background-color: #f8f8f9;
             margin-top: 15px;
             padding: .25rem .24rem .3rem;
             .resource_title {
@@ -213,7 +214,7 @@
               span:first-child {
                 font-size: 1.3em;
                 font-weight: 600;
-                color: #555;
+                color: #17233d;
                 i {
                   display: inline-block;
                   width: .08rem;
@@ -231,17 +232,17 @@
               justify-content: space-between;
               align-items: flex-end;
               span:first-child {
-                color: #fe5730;
+                color: #ed4014;
                 font-size: 1.5em;
                 padding-bottom: .25rem;
               }
               span:nth-child(2) {
                 i {
-                  color: #fe5730;
+                  color: #ed4014;
                 }
               }
               button {
-                background-color: #1b61ff;
+                background-color: #2d8cf0;
                 box-shadow: none;
                 border: none;
                 padding: .1rem .15rem;
@@ -260,7 +261,7 @@
           h3 {
             font-size: 1.2em;
             font-weight: 600;
-            color: #555;
+            color: #17233d;
             i {
               display: inline-block;
               width: .08rem;
@@ -274,7 +275,7 @@
             text-indent: 1.8em;
             margin-top: .3rem;
             font-size: .8em;
-            color: #2d3142;
+            color: #515a6e;
             line-height: 1.5em;
           }
         }

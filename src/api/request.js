@@ -19,8 +19,8 @@ service.interceptors.request.use(config => {
     }
   }else {
     config.params = {...config.params};
-    config.params.hy_openid=JSON.parse(cookie.get('userInfo')).hy_openid;
-    config.params.hy_touxiang=JSON.parse(cookie.get('userInfo')).hy_touxiang;
+   /* config.params.hy_openid=JSON.parse(cookie.get('userInfo')).hy_openid;
+    config.params.hy_touxiang=JSON.parse(cookie.get('userInfo')).hy_touxiang;*/
   }
   return config;
 }, error => {  //请求错误处理

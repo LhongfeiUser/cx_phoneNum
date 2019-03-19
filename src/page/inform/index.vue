@@ -11,7 +11,7 @@
                  :auto-fill=false
                  ref="loadmore">
       <ul class="inform_list">
-        <li v-for="(item,index) in getScoreLog" :key="index" @click="to_detail(item.zn_id)">
+        <li v-for="(item,index) in getScoreLog" :class="item.zn_state===2?'font_color':''" :key="index" @click="to_detail(item.zn_id)">
           <h3>【{{item.zn_title}}】</h3>
           <p>{{item.zn_content}}</p>
           <span>{{item.zn_creattime}}</span>
@@ -40,7 +40,7 @@
     methods: {
       inform_list(pageNo) {
         get_inform({page: pageNo}).then( res => {
-           res.forEach((item,index)=>{
+          res.forEach((item,index)=>{
             let d =new Date(item.zn_creattime);
             item.zn_creattime=formatDate(d)
           });
@@ -50,8 +50,8 @@
           this.getScoreLog=this.getScoreLog.concat(res);
         })
       },
-      to_detail(item) {
-        this.$router.push('/user/inform/detail/' + item);
+      to_detail(item_id) {
+        this.$router.push('/user/inform/detail/' + item_id);
       },
       loadBottomUse() {
         this.pageNo += 1;
@@ -71,10 +71,11 @@
       padding: .45rem .5rem .2rem;
       background-color: #fff;
       margin-bottom: .2rem;
+      color:#515a6e;
       h3 {
         font-size: 1em;
         font-weight: 600;
-        color: #555;
+        color: #17233d;
         margin-bottom: .2rem;
       }
       p {
@@ -93,6 +94,12 @@
         font-size: .8em;
         margin-top: .2rem;
         text-align: right;
+      }
+    }
+    li.font_color{
+      color: #c5c8ce!important;
+      h3{
+        color:#c5c8ce;
       }
     }
   }
