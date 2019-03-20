@@ -4,7 +4,7 @@ import layout from '@/page/layout'
 Vue.use(Router);
 
 export default new Router({
-  model:history,
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -40,6 +40,16 @@ export default new Router({
           path:'/user/inform/detail/:id',
           name:'inform_detail',
           component:()=>import('@/page/inform_detail/index')
+        },
+        {
+          path:'/user/help_center',
+          name:'help_center',
+          component:()=>import('@/page/help_center/index')
+        },
+        {
+          path:'/user/help_center/detail/:id',
+          name:'help_detail',
+          component:()=>import('@/page/help_detail/index')
         },
         {
           path:'/user/perfect_info',

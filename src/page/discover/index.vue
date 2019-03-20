@@ -44,7 +44,6 @@
             </p>
           </div>
         </mt-loadmore>
-
       </main>
     </div>
 </template>

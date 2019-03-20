@@ -41,7 +41,7 @@
           <mt-cell title="关于" is-link to="/user/about">
             <img slot="icon" src="../../assets/images/icon_about.png" width="24" height="24">
           </mt-cell>
-          <mt-cell title="帮助中心" is-link="">
+          <mt-cell title="帮助中心" is-link to="/user/help_center">
             <img slot="icon" src="../../assets/images/icon_help.png" width="24" height="24">
           </mt-cell>
         </div>
