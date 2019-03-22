@@ -11,10 +11,15 @@
     </div>
     <main>
       <div class="banner">
-        <img src="../../assets/images/banner.jpg" alt="">
+        <!---->
+        <mt-swipe :show-indicators="false">
+          <mt-swipe-item v-for="(item,index)in bannerArr" :key="index"><img :src="item.banner_tupian" height="150"></mt-swipe-item>
+        </mt-swipe>
         <div class="advertising">
           <i></i>
-          <span>6.22注册成易润通会员，成功路上更轻松，查看详情! <i class="arrows"></i></span>
+          <marquee behavior="scroll" scrollamount="2" scrolldelay="2" bgcolor="#fafafa">
+            <span>{{note}} <!--<i class="arrows"></i>--></span>
+          </marquee>
         </div>
         <ul>
           <li>
@@ -70,45 +75,48 @@
 </template>
 <script>
   import {get_userInfo} from '@/api/getUserInfo'
-  import {getVip_info} from '@/api/get_home_data'
+  import {getVip_info,get_note,get_banner} from '@/api/get_home_data'
   import cookie from 'js-cookie'
-
   export default {
     data() {
       return {
         userName: '',
         resource: [],
+        note:'',
+        bannerArr:[],
       }
     },
-    created() {
-      if (cookie.get('userInfo')) {
-      } else {
-        let userData = {
-          hy_openid: '13212312312122331126',
-          hy_touxiang: 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLMfGkPSB6nMhxJdV6KEkUTibyUNQVIBpZ9FPh4AoHYBhHSZ46G8jCtZVYZ1541d56cLZeMrdVNUyg/132'
-        };
-        cookie.set('userInfo', userData)
+    created() {},
+    mounted(){
+      if(cookie.get('userInfo')){
+        this.getInitData();
+        this.get_userData();
+      }else {
+        this.initWxchat();
       }
-      this.get_userData();
-      this.getInitData();
     },
     methods: {
+     async initWxchat(){
+       await this.$parent.getUser();
+        this.getInitData();
+        this.get_userData();
+      },
       get_userData() {
-        let userData = {
-          hy_openid: '13212312312122331126',
-          hy_touxiang: 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLMfGkPSB6nMhxJdV6KEkUTibyUNQVIBpZ9FPh4AoHYBhHSZ46G8jCtZVYZ1541d56cLZeMrdVNUyg/132'
-        };
+        let userData = {};
         get_userInfo(userData).then(res => {
           this.userName = res.hy_nicheng;
-        })
+        });
       },
       getInitData() {
-        let vip_info_data = {
-          hy_nicheng: '',
-          hy_sex: 1
-        };
+        let vip_info_data = {};
         getVip_info(vip_info_data).then(res => {
           this.resource = res;
+        });
+        get_note({}).then(res=>{
+          this.note=res;
+        });
+        get_banner({}).then(res=>{
+          this.bannerArr=res;
         })
       }
     }
@@ -159,6 +167,8 @@
             margin-bottom: .2rem;
           }
           .advertising {
+            display: flex;
+            align-items: center;
             i {
               display: inline-block;
               width: .4rem;

@@ -1,10 +1,5 @@
 <template>
   <div class="inform_detail">
-    <mt-header fixed title="通知详情">
-      <router-link to="/user/inform" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-    </mt-header>
     <main>
       <div>
         <span class="now_date">{{inform_dataList.zn_creattime}}</span>
@@ -51,7 +46,6 @@
   }
   main {
     color: #555;
-    margin-top: 40px;
     padding: .5rem;
     .now_date {
       display: inline-block;

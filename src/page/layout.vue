@@ -19,16 +19,18 @@
 </template>
 
 <script>
-  import Home from '@/page/home/index'
-  import Discover from '@/page/discover/index'
-  import User from '@/page/user/index'
+  import axios from 'axios'
+  import qs from 'qs'
+  import cookie from 'js-cookie'
   export default {
     data(){
       return{
         active:'',
+        hasCode:'',
+        hasToken:'',
+        url:process.env.NODE_ENV,
       }
     },
-    components:{Home,Discover,User},
     watch: {
       active: function (val, oldVal) {
         if(val==='home')this.$router.push('/home');
@@ -37,7 +39,23 @@
       }
     },
     created(){
-      /*window.location.href('https://open.weixin.qq.com/connect/oauth2/authorize?appid='+$appid+'&redirect_uri='.urlencode(this.$reuter)+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect')*/
+    },
+    methods:{
+      get_code(){ //获取code
+        let originUrl = encodeURIComponent(window.location.origin + window.location.pathname);
+        window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc8571de4ef2a3c57&redirect_uri='+originUrl+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+      },
+     async getUser(){
+        let code =this.$route.query.code;
+        if(code&&code!==''){
+          this.hasCode=code;
+         await axios.post(`${this.url}/api/register/actss`,qs.stringify({code:code})).then(res=>{
+            cookie.set('userInfo',res.data.data);
+         })
+        }else {
+          this.get_code();
+        }
+      }
     }
   }
 </script>

@@ -1,10 +1,5 @@
 <template>
   <div class="detail">
-    <mt-header fixed title="帮助详情">
-      <router-link to="/user/help_center" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-    </mt-header>
     <main>
       <div class="nav_banner">
         <ul>
@@ -60,7 +55,6 @@
   .detail{
     min-height:100vh;
     main{
-      margin-top:40px;
       .nav_banner{
         background: #fff;
         ul{

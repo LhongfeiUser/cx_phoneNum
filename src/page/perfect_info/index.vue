@@ -1,10 +1,5 @@
 <template>
   <div class="perfect_info">
-    <mt-header fixed title="修改个人信息">
-      <router-link to="/user" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-    </mt-header>
     <main>
       <div class="form_data">
         <mt-field label="昵称" placeholder="请输入昵称" v-model="userName"></mt-field>
@@ -116,7 +111,6 @@
 
   main {
     .form_data {
-      margin-top: 40px;
       .verify_pic {
         display: flex;
         justify-content: flex-start;

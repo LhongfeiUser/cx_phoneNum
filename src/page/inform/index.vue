@@ -1,10 +1,5 @@
 <template>
   <div class="inform">
-    <mt-header fixed title="系统通知">
-      <router-link to="/user" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-    </mt-header>
     <mt-loadmore :bottom-method="loadBottomUse"
                  :bottomPullText='bottomText'
                  :bottom-all-loaded="allLoaded"
@@ -66,7 +61,6 @@
 
 <style scoped lang="scss">
   .inform_list {
-    margin-top: 40px;
     li {
       padding: .45rem .5rem .2rem;
       background-color: #fff;

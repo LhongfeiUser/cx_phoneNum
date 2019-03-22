@@ -1,10 +1,5 @@
 <template>
     <div class="detail">
-      <mt-header fixed title="新闻详情">
-        <router-link to="/discover" slot="left">
-          <mt-button icon="back">返回</mt-button>
-        </router-link>
-      </mt-header>
       <div class="header">
         <div class="logo">
           <img src="../../assets/images/logo.png" alt="">
@@ -74,7 +69,6 @@
       align-items: flex-end;
       padding: .24rem .24rem .35rem;
       background-color: #fff;
-      margin-top:40px;
       .logo {
         display: flex;
         align-items: center;
