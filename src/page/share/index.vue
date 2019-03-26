@@ -19,38 +19,64 @@
 </template>
 
 <script>
-    export default {
+  import {get_share} from "../../api/get_home_data";
+
+  export default {
         data(){
-          return{}
+          return{
+            config_data:'',
+          }
         },
       created(){
           this.share();
       },
       methods:{
-          share(){
-            wx.config({
-              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-              appId: '', // 必填，公众号的唯一标识
-              timestamp:'', // 必填，生成签名的时间戳
-              nonceStr: '', // 必填，生成签名的随机串
-              signature: '',// 必填，签名
-              jsApiList: [] // 必填，需要使用的JS接口列表
-            });
-            wx.trigger(function () {
-              console.log(3);
-            });
-            console.log(2);
-            wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
-              console.log(1);
-              wx.updateTimelineShareData({
-                title: 'hahha', // 分享标题
-                link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: '', // 分享图标
-                success: function () {
-                  // 设置成功
-                }
-              })
-            });
+           share(){
+             get_share({}).then(async res=>{
+              console.log(res);
+             await wx.config(JSON.parse(res.jssdkconfig));
+             wx.ready(function () {     //需在用户可能点击分享按钮前就先调用
+               let title='成易润通';
+               let desc='亮泽呀打啥字';
+               let link='http://lihongfei.top';
+               let img='http://wimg.spriteapp.cn/ugc/2018/07/20/5b5176302ffdc_1.jpg';
+               wx.updateAppMessageShareData({
+                 title: title, // 分享标题
+                 desc: desc, // 分享描述
+                 link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                 imgUrl: img, // 分享图标
+                 success: function () {
+                   // 设置成功
+                 }
+               })
+               wx.updateTimelineShareData({
+                 title:title, // 分享标题
+                 link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                 imgUrl: img, // 分享图标
+                 success: function () {
+                   // 设置成功
+                 }
+               })
+               wx.onMenuShareTimeline({
+                 title: title, // 分享标题
+                 link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                 imgUrl: img, // 分享图标
+                 success: function () {
+                   // 用户点击了分享后执行的回调函数
+                 }})
+               wx.onMenuShareAppMessage({
+                 title: title, // 分享标题
+                 desc: desc, // 分享描述
+                 link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                 imgUrl: img, // 分享图标
+                 type: 'link', // 分享类型,music、video或link，不填默认为link
+                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                 success: function () {
+                   // 用户点击了分享后执行的回调函数
+                 }
+               });
+              });
+             });
           }
       }
     }

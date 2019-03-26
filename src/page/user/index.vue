@@ -30,10 +30,10 @@
           <mt-cell title="通知" is-link to="/user/inform">
             <img slot="icon" src="../../assets/images/inform_icon.png" width="24" height="24">
           </mt-cell>
-          <mt-cell title="邀请好友" is-link>
+          <mt-cell title="邀请好友" is-link to="/share">
             <img slot="icon" src="../../assets/images/icon_invition.png" width="24" height="24">
           </mt-cell>
-          <mt-cell title="修改个人信息" is-link to="/user/perfect_info">
+          <mt-cell title="完善个人信息" is-link to="/user/perfect_info">
             <img slot="icon" src="../../assets/images/perfect.png" width="24" height="24">
           </mt-cell>
         </div>

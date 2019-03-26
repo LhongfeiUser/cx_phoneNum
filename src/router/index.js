@@ -64,6 +64,11 @@ export default new Router({
       ]
     },
     {
+      path:'/home/pay',
+      name:'pay',
+      component:()=>import('@/page/pay/index')
+    },
+    {
       path:'/share',
       name:'share',
       component:()=>import('@/page/share/index')

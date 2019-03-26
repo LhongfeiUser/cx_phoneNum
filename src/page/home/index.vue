@@ -12,8 +12,10 @@
     <main>
       <div class="banner">
         <!---->
-        <mt-swipe :show-indicators="false">
-          <mt-swipe-item v-for="(item,index)in bannerArr" :key="index"><img :src="item.banner_tupian" height="150"></mt-swipe-item>
+        <mt-swipe :show-indicators="false" style="height:180px;">
+          <mt-swipe-item v-for="(item,index) in bannerArr" :key="index">
+            <img :src="item.banner_tupian" height="280px">
+          </mt-swipe-item>
         </mt-swipe>
         <div class="advertising">
           <i></i>
@@ -24,16 +26,20 @@
         <ul>
           <li>
             <img src="../../assets/images/icon_01.png">
-            <span>注册礼包</span>
+            <span>新人礼包</span>
           </li>
-          <li>
-            <img src="../../assets/images/icon_02.png">
-            <span>热门咨询</span>
-          </li>
-          <li>
-            <img src="../../assets/images/icon_03.png">
-            <span>安全资源</span>
-          </li>
+          <router-link to="/discover">
+            <li>
+              <img src="../../assets/images/icon_02.png">
+              <span>热门咨询</span>
+            </li>
+          </router-link>
+          <router-link to="/user/inform">
+            <li>
+              <img src="../../assets/images/icon_03.png">
+              <span>安全资源</span>
+            </li>
+          </router-link>
           <router-link to="/share">
             <li>
               <img src="../../assets/images/icon_04.png">
@@ -53,7 +59,7 @@
             <span>{{item.le_money}}元/年</span>
             <span>每{{item.le_interval}}天可以获得<i>{{item.le_number}}</i>个资源</span>
             <!--<button>立即购买</button>-->
-            <mt-button type="primary" size="small">立即购买</mt-button>
+            <mt-button type="primary" size="small" @click.native="immediately_buy(item.le_id)">立即购买</mt-button>
           </div>
         </li>
       </ul>
@@ -118,6 +124,9 @@
         get_banner({}).then(res=>{
           this.bannerArr=res;
         })
+      },
+      immediately_buy(le_id){
+         this.$router.push('/home/pay?le_id='+le_id)
       }
     }
   }
@@ -129,7 +138,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      padding: .24rem .24rem .35rem;
+      padding: .24rem .24rem .1rem;
       background-color: #f8f8f9;
       .logo {
         display: flex;
@@ -162,20 +171,25 @@
           background-color: #f8f8f9;
           img {
             width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: .1rem;
             margin-bottom: .2rem;
           }
           .advertising {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            margin-top:15px;
             i {
-              display: inline-block;
-              width: .4rem;
-              height: .45rem;
+              display: block;
+              width: 25px;
+              height: 25px;
               background: url("../../assets/images/trumpent.png") no-repeat;
               background-size: 100% 100%;
               margin: 0 .1rem;
+            }
+            marquee{
+              width:90%;
             }
             span {
               font-size: .8em;

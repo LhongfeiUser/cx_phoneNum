@@ -6,7 +6,7 @@
           <span>成易润通</span>
         </div>
         <div class="vip_login">
-          <span>hi~亮泽呀</span>
+          <span>{{userName}}</span>
         </div>
       </div>
       <main>
@@ -40,15 +40,17 @@
 
 <script>
   import {get_discover_detail} from "../../api/discover";
-
+  import cookie from 'js-cookie'
   export default {
         data(){
           return{
             detail_list:'',
+            userName:'',
           }
         },
       created(){
         this.discover_detail();
+        this.userName= JSON.parse(cookie.get('userInfo')).hy_nicheng;
       },
       methods:{
         discover_detail(){

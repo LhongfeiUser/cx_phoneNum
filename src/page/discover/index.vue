@@ -58,10 +58,12 @@
           pageNo: 1,
           allLoaded: false,
           bottomText: '上拉加载数据...',
+          userName:'',
         }
       },
     created(){
       this.get_list(1)
+      console.log(cookie.get('userInfo'));
     },
       methods:{
         get_list(pageNo){
