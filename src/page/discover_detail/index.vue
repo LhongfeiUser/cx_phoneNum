@@ -12,22 +12,30 @@
       <main>
         <div class="nav_banner">
           <ul>
-            <li>
-              <img src="../../assets/images/icon_01.png" alt="">
-              <span>注册礼包</span>
-            </li>
-            <li>
-              <img src="../../assets/images/icon_02.png" alt="">
-              <span>热门咨询</span>
-            </li>
-            <li>
-              <img src="../../assets/images/icon_03.png" alt="">
-              <span>安全资源</span>
-            </li>
-            <li>
-              <img src="../../assets/images/icon_04.png" alt="">
-              <span>推荐分享</span>
-            </li>
+            <router-link to="/home/gift_bag">
+              <li>
+                <img src="../../assets/images/icon_01.png">
+                <span>新人礼包</span>
+              </li>
+            </router-link>
+            <router-link to="/discover">
+              <li>
+                <img src="../../assets/images/icon_02.png">
+                <span>热门咨询</span>
+              </li>
+            </router-link>
+            <router-link to="/user/inform">
+              <li>
+                <img src="../../assets/images/icon_03.png">
+                <span>安全资源</span>
+              </li>
+            </router-link>
+            <router-link to="/share">
+              <li>
+                <img src="../../assets/images/icon_04.png">
+                <span>推荐分享</span>
+              </li>
+            </router-link>
           </ul>
         </div>
         <div class="content">
@@ -111,7 +119,6 @@
             flex-direction: column;
             img {
               width: 55%;
-              height: 55%;
             }
             span {
               font-size: .3rem;

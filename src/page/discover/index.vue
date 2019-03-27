@@ -6,24 +6,30 @@
           <span>成易润通</span>
         </div>
         <div class="vip_login">
-          <span>hi~亮泽呀</span>
+          <span>{{userName}}</span>
         </div>
       </header>
       <main>
         <div class="nav_banner">
           <ul>
-            <li>
-              <img src="../../assets/images/icon_01.png" alt="">
-              <span>注册礼包</span>
-            </li>
-            <li>
-              <img src="../../assets/images/icon_02.png" alt="">
-              <span>热门咨询</span>
-            </li>
-            <li>
-              <img src="../../assets/images/icon_03.png" alt="">
-              <span>安全资源</span>
-            </li>
+            <router-link to="/home/gift_bag">
+              <li>
+                <img src="../../assets/images/icon_01.png">
+                <span>新人礼包</span>
+              </li>
+            </router-link>
+            <router-link to="/discover">
+              <li>
+                <img src="../../assets/images/icon_02.png">
+                <span>热门咨询</span>
+              </li>
+            </router-link>
+            <router-link to="/user/inform">
+              <li>
+                <img src="../../assets/images/icon_03.png">
+                <span>安全资源</span>
+              </li>
+            </router-link>
             <router-link to="/share">
               <li>
                 <img src="../../assets/images/icon_04.png">
@@ -62,8 +68,10 @@
         }
       },
     created(){
-      this.get_list(1)
-      console.log(cookie.get('userInfo'));
+      this.get_list(1);
+      if(cookie.get('userInfo')){
+        this.userName=JSON.parse(cookie.get('userInfo')).hy_nicheng
+      }
     },
       methods:{
         get_list(pageNo){

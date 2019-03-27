@@ -2,8 +2,8 @@
     <div class="user">
       <header>
         <div class="head_pic">
-          <img src="../../assets/images/icon_04.png">
-          <span>昵称</span>
+          <img :src="head_pic">
+          <span>{{userName}}</span>
         </div>
         <div class="vip_icon">
           <i class="icon_img"></i>
@@ -54,10 +54,13 @@
   export default {
       data(){
           return{
+            userName:'',
+            head_pic:''
           }
       },
       created(){
-
+        this.userName= JSON.parse(cookie.get('userInfo')).hy_nicheng;
+        this.head_pic= JSON.parse(cookie.get('userInfo')).hy_touxiang;
       },
       methods:{
       }

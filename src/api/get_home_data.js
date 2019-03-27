@@ -33,6 +33,15 @@ export const get_order=data=>{
   })
 };
 
+//支付状态
+export const isOrder=data=>{
+  return service({
+    url:'api/user/order_find',
+    method:'post',
+    data
+  })
+};
+
 //分享
 
 export const get_share=data=>{

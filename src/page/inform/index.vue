@@ -36,8 +36,8 @@
       inform_list(pageNo) {
         get_inform({page: pageNo}).then( res => {
           res.forEach((item,index)=>{
-            let d =new Date(item.zn_creattime);
-            item.zn_creattime=formatDate(d)
+            let d =new Date(item.zn_creattime*1000);
+            item.zn_creattime=formatDate(d);
           });
           if(res.length===0){
             this.allLoaded = true;// 若数据已全部获取完毕

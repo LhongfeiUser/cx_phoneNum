@@ -24,10 +24,12 @@
           </marquee>
         </div>
         <ul>
-          <li>
-            <img src="../../assets/images/icon_01.png">
-            <span>新人礼包</span>
-          </li>
+          <router-link to="/home/gift_bag">
+            <li>
+              <img src="../../assets/images/icon_01.png">
+              <span>新人礼包</span>
+            </li>
+          </router-link>
           <router-link to="/discover">
             <li>
               <img src="../../assets/images/icon_02.png">
@@ -56,10 +58,10 @@
           </div>
           <div class="register">注册{{item.le_name}}</div>
           <div class="resource_bottom">
-            <span>{{item.le_money}}元/年</span>
+            <span>{{item.le_money/100}}元/年</span>
             <span>每{{item.le_interval}}天可以获得<i>{{item.le_number}}</i>个资源</span>
             <!--<button>立即购买</button>-->
-            <mt-button type="primary" size="small" @click.native="immediately_buy(item.le_id)">立即购买</mt-button>
+            <mt-button type="primary" size="small" @click.native="immediately_buy(item)">立即购买</mt-button>
           </div>
         </li>
       </ul>
@@ -125,8 +127,8 @@
           this.bannerArr=res;
         })
       },
-      immediately_buy(le_id){
-         this.$router.push('/home/pay?le_id='+le_id)
+      immediately_buy(item){
+         this.$router.push(`/home/pay?le_id=${item.le_id}&prise=${item.le_money}`)
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="help_center">
     <main>
-      <div class="nav_banner">
+      <!--<div class="nav_banner">
         <ul>
           <li>
             <img src="../../assets/images/icon_01.png" alt="">
@@ -22,7 +22,7 @@
             </li>
           </router-link>
         </ul>
-      </div>
+      </div>-->
       <mt-loadmore :bottom-method="loadBottomUse"
                    :bottomPullText='bottomText'
                    :bottom-all-loaded="allLoaded"

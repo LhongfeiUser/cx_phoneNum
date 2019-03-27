@@ -69,6 +69,11 @@ export default new Router({
       component:()=>import('@/page/pay/index')
     },
     {
+      path:'/home/gift_bag',
+      name:'gift_bag',
+      component:()=>import('@/page/gift_bag/index')
+    },
+    {
       path:'/share',
       name:'share',
       component:()=>import('@/page/share/index')

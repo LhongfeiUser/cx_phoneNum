@@ -66,7 +66,7 @@ export const help_center=data=>{
   })
 };
 
-//帮助列表
+//帮助详情
 export const get_help_detail=data=>{
   return service({
     url:'api/news/help_detail',

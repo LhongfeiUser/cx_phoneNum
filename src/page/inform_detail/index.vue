@@ -28,7 +28,7 @@
         get_inform_detail({zn_id:Number(this.$route.params.id)}).then(res => {
           console.log(res);
           if(res){
-            let d =new Date(res.data.zn_creattime);
+            let d =new Date(res.data.zn_creattime*1000);
             res.data.zn_creattime=formatDate(d);
             this.inform_dataList=res.data;
           }else {
