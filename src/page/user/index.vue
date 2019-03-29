@@ -2,8 +2,8 @@
     <div class="user">
       <header>
         <div class="head_pic">
-          <img :src="head_pic">
-          <span>{{userName}}</span>
+          <img :src="users.hy_touxiang">
+          <span>{{users.hy_nicheng}}</span>
         </div>
         <div class="vip_icon">
           <i class="icon_img"></i>
@@ -12,7 +12,7 @@
         </div>
       </header>
       <main>
-        <ul class="nav_module">
+       <!-- <ul class="nav_module">
           <li>
             <img src="../../assets/images/vip_center.png">
             <span>会员中心</span>
@@ -25,24 +25,32 @@
             <img src="../../assets/images/vip_resource.png">
             <span>我的资源</span>
           </li>
-        </ul>
+        </ul>-->
+        <div class="vip_class">
+          <div class="vip_top">
+            <h2><i></i><strong>您当前会员等级：</strong></h2>
+            <span>{{users.le_name}}</span>
+          </div>
+          <span><strong>会员说明：</strong>每{{users.le_interval}}天可以免费获取{{users.le_number}}个资源</span>
+          <span><strong>会员到期时间：</strong>{{users.hy_starttime}} 到 {{users.hy_endtime}}</span>
+        </div>
         <div class="inform_module">
           <mt-cell title="通知" is-link to="/user/inform">
-            <img slot="icon" src="../../assets/images/inform_icon.png" width="24" height="24">
+            <img slot="icon" src="../../assets/images/icon__3.png" width="28" height="28">
           </mt-cell>
           <mt-cell title="邀请好友" is-link to="/share">
-            <img slot="icon" src="../../assets/images/icon_invition.png" width="24" height="24">
+            <img slot="icon" src="../../assets/images/icon__5.png" width="28" height="28">
           </mt-cell>
           <mt-cell title="完善个人信息" is-link to="/user/perfect_info">
-            <img slot="icon" src="../../assets/images/perfect.png" width="24" height="24">
+            <img slot="icon" src="../../assets/images/icon__4.png" width="28" height="28">
           </mt-cell>
         </div>
         <div class="about_us">
           <mt-cell title="关于" is-link to="/user/about">
-            <img slot="icon" src="../../assets/images/icon_about.png" width="24" height="24">
+            <img slot="icon" src="../../assets/images/icon__2.png" width="28" height="28">
           </mt-cell>
           <mt-cell title="帮助中心" is-link to="/user/help_center">
-            <img slot="icon" src="../../assets/images/icon_help.png" width="24" height="24">
+            <img slot="icon" src="../../assets/images/icon__1.png" width="28" height="28">
           </mt-cell>
         </div>
       </main>
@@ -51,18 +59,22 @@
 
 <script>
   import cookie from 'js-cookie'
+  import {get_userInfo} from '@/api/getUserInfo'
   export default {
       data(){
           return{
-            userName:'',
-            head_pic:''
+            users:'',
           }
       },
-      created(){
-        this.userName= JSON.parse(cookie.get('userInfo')).hy_nicheng;
-        this.head_pic= JSON.parse(cookie.get('userInfo')).hy_touxiang;
+      mounted(){
+        this._getdata()
       },
       methods:{
+         _getdata(){
+           get_userInfo({}).then(res => {
+            this.users = res;
+          });
+        }
       }
     }
 </script>
@@ -79,10 +91,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size:.8em;
+        font-size:1em;
         img{
-          width:.75rem;
-          height:.75rem;
+          width:1rem;
+          height:1rem;
           border:1px solid #000;
           border-radius:50%;
           margin-right:5px;
@@ -113,22 +125,30 @@
       }
     }
     main{
-      .nav_module{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+      .vip_class{
         background: #fff;
-        padding: .5rem 0 .7rem;
-        margin:.15rem 0;
-        li{
+        margin: 10px 0;
+        padding: .2rem .3rem .3rem;
+        font-size: .8em;
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        line-height: .4rem;
+        color: #657180;
+        strong{
+          font-size:1em;
+          font-weight: 600;
+          color:#464c5b;
+        }
+        .vip_top{
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          img{
-            width:.65rem;
-            height:.45rem;
-            margin-bottom:.25rem;
+          h2{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            i{
+
+            }
           }
         }
       }

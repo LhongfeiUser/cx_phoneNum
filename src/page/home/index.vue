@@ -36,12 +36,10 @@
               <span>热门咨询</span>
             </li>
           </router-link>
-          <router-link to="/user/inform">
-            <li>
-              <img src="../../assets/images/icon_03.png">
-              <span>安全资源</span>
-            </li>
-          </router-link>
+          <li @click="getResource">
+            <img src="../../assets/images/icon_03.png">
+            <span>安全资源</span>
+          </li>
           <router-link to="/share">
             <li>
               <img src="../../assets/images/icon_04.png">
@@ -54,13 +52,14 @@
         <li v-for="(item,index) in resource" :key="index">
           <div class="resource_title">
             <span><i></i>{{item.le_name}}资源</span>
-            <span>更多</span>
+            <router-link to="/home/resource">
+              <span>更多</span>
+            </router-link>
           </div>
           <div class="register">注册{{item.le_name}}</div>
           <div class="resource_bottom">
             <span>{{item.le_money/100}}元/年</span>
             <span>每{{item.le_interval}}天可以获得<i>{{item.le_number}}</i>个资源</span>
-            <!--<button>立即购买</button>-->
             <mt-button type="primary" size="small" @click.native="immediately_buy(item)">立即购买</mt-button>
           </div>
         </li>
@@ -83,7 +82,7 @@
 </template>
 <script>
   import {get_userInfo} from '@/api/getUserInfo'
-  import {getVip_info,get_note,get_banner} from '@/api/get_home_data'
+  import {getVip_info,get_note,get_banner,get_phone} from '@/api/get_home_data'
   import cookie from 'js-cookie'
   export default {
     data() {
@@ -94,8 +93,7 @@
         bannerArr:[],
       }
     },
-    created() {},
-    mounted(){
+    created(){
       if(cookie.get('userInfo')){
         this.getInitData();
         this.get_userData();
@@ -113,6 +111,7 @@
         let userData = {};
         get_userInfo(userData).then(res => {
           this.userName = res.hy_nicheng;
+          cookie.set('userInfo',res);
         });
       },
       getInitData() {
@@ -128,7 +127,15 @@
         })
       },
       immediately_buy(item){
-         this.$router.push(`/home/pay?le_id=${item.le_id}&prise=${item.le_money}`)
+         this.$router.push(`/home/pay?le_id=${item.le_id}`)
+      },
+      getResource(){
+        get_phone({}).then(res=>{
+          this.$toast(res.msg);
+          if(res.code===1){
+            this.$router.push('/user/inform')
+          }
+        })
       }
     }
   }
@@ -192,6 +199,7 @@
             }
             marquee{
               width:90%;
+              display: inline-block;
             }
             span {
               font-size: .8em;

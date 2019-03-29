@@ -22,15 +22,27 @@
         le_prise:''
       }
     },
+    beforeRouteEnter(to, from, next) {
+      if ( to.path !== location.pathname) {
+        // 此处不可使用location.replace
+        location.assign(to.fullPath)
+      } else {
+        next()
+      }
+    },
     created() {
      this.pay();
-      this.le_prise=this.$route.query.prise/100;
     },
     methods: {
       pay() {
         get_order({level: this.$route.query.le_id}).then(async res => {
-          this.config_data=res;
-          await wx.config(JSON.parse(res.jssdkconfig));
+          this.le_prise=res.money/100 || 0;
+          if(res.codes===1){
+            this.config_data=res;
+            await wx.config(JSON.parse(res.jssdkconfig));
+          }else {
+            this.$toast(res.msg);
+          }
         });
       },
       lk_pay(){

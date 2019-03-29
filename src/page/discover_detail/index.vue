@@ -40,7 +40,7 @@
         </div>
         <div class="content">
           <h3 class="title">{{detail_list.title}}</h3>
-          <div class="article" v-html="detail_list.content"></div>
+          <div class="article" v-html="detail_list.content" ref="article_con"></div>
         </div>
       </main>
     </div>
@@ -130,7 +130,7 @@
         padding:.5rem .2rem;
         background:#fff;
         h3.title{
-          font-size:.9em;
+          font-size:1.2em;
           font-weight: 600;
           color:#17233d;
           margin-bottom:.2rem;

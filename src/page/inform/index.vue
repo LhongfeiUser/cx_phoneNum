@@ -8,7 +8,7 @@
       <ul class="inform_list">
         <li v-for="(item,index) in getScoreLog" :class="item.zn_state===2?'font_color':''" :key="index" @click="to_detail(item.zn_id)">
           <h3>【{{item.zn_title}}】</h3>
-          <p>{{item.zn_content}}</p>
+          <p v-html="item.zn_content"></p>
           <span>{{item.zn_creattime}}</span>
         </li>
       </ul>

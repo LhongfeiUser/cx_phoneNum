@@ -51,3 +51,12 @@ export const get_share=data=>{
     data,
   })
 };
+
+//获取资源
+export const get_phone=data=>{
+  return service({
+    url:'api/user/huoqudianhua',
+    method:'post',
+    data,
+  })
+};

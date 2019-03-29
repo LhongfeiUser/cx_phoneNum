@@ -41,7 +41,6 @@
 
 <script>
   import {help_center} from "../../api/user";
-
   export default {
     data(){
       return{

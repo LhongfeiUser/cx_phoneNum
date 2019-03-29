@@ -2,8 +2,8 @@
   <div class="perfect_info">
     <main>
       <div class="form_data">
-        <mt-field label="昵称" placeholder="请输入昵称" v-model="userName"></mt-field>
-        <mt-field label="性别" placeholder="请输入性别" v-model="sex"></mt-field>
+        <mt-field label="昵称" placeholder="请输入昵称" :disabled='isdisabled' v-model="userName"></mt-field>
+        <mt-field label="性别" placeholder="请输入男或女" :attr='isatrr' v-model="sex"></mt-field>
         <mt-field label="邮箱" placeholder="请输入邮箱" type="email" v-model="userEmail"></mt-field>
         <mt-field label="手机号" placeholder="请输入手机号" v-model="telPhone" type="tel"></mt-field>
         <div class="verify_pic">
@@ -31,11 +31,14 @@
     data() {
       return {
         url: process.env.NODE_ENV,
+        isdisabled:true,
+        isatrr:{maxlength:1},
         param_data: '',
         userName: '',
         telPhone: '',
         userEmail: '',
         sex: '',
+        sexNum:'',
         isCode: true,
         note_code:'',
         timer: 30,
@@ -43,6 +46,9 @@
     },
     created() {
       this.get_pic();
+      if(cookie.get('userInfo')){
+        this.userName=JSON.parse(cookie.get('userInfo')).hy_nicheng
+      }
     },
     methods: {
       get_pic() {
@@ -54,10 +60,18 @@
         this.url = this.url + `/api/index/picyzm?hy_openid=${pic_data.hy_openid}&hy_touxiang=${pic_data.hy_touxiang}&m=${c}`;
       },
       verify_pic() {
+        if(this.sex==='男'){
+          this.sexNum=1
+        }else if(this.sexNum==='女') {
+          this.sexNum=2;
+        }else{
+          this.sexNum=0;
+        }
         let _info = {
           hy_phone:Number(this.telPhone),
           hy_code:this.note_code,
-          hy_sex:'1'
+          hy_sex:this.sexNum,
+          hy_email:this.userEmail
         };
         amend_info(_info).then(res => {
           if(res.code===1){
