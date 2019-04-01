@@ -53,7 +53,7 @@
           <div class="resource_title">
             <span><i></i>{{item.le_name}}资源</span>
             <router-link to="/home/resource">
-              <span>更多</span>
+              <span style="font-size:1em;">更多</span>
             </router-link>
           </div>
           <div class="register">注册{{item.le_name}}</div>

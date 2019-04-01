@@ -24,12 +24,10 @@
                 <span>热门咨询</span>
               </li>
             </router-link>
-            <router-link to="/user/inform">
-              <li>
-                <img src="../../assets/images/icon_03.png">
-                <span>安全资源</span>
-              </li>
-            </router-link>
+            <li @click="getResource">
+              <img src="../../assets/images/icon_03.png">
+              <span>安全资源</span>
+            </li>
             <router-link to="/share">
               <li>
                 <img src="../../assets/images/icon_04.png">
@@ -57,6 +55,7 @@
 <script>
   import cookie from 'js-cookie';
   import {get_discover} from "../../api/discover";
+  import {get_phone} from "../../api/get_home_data";
   export default {
       data(){
         return{
@@ -92,6 +91,14 @@
             this.get_list(this.pageNo)
           },1500);
         },
+        getResource(){
+          get_phone({}).then(res=>{
+            this.$toast(res.msg);
+            if(res.code===1){
+              this.$router.push('/user/inform')
+            }
+          })
+        }
       }
     }
 </script>
@@ -137,6 +144,7 @@
        ul{
          display: flex;
          justify-content: space-around;
+         align-items: center;
          border-top:1px solid #888;
          padding:.25rem;
          li {

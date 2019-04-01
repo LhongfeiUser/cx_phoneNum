@@ -3,8 +3,7 @@
     <main>
       <div>
         <span class="now_date">{{inform_dataList.zn_creattime}}</span>
-        <div class="detail_content">
-          {{inform_dataList.zn_content}}
+        <div class="detail_content" v-html="inform_dataList.zn_content">
         </div>
       </div>
     </main>
@@ -26,7 +25,6 @@
     methods: {
       getDetail() {
         get_inform_detail({zn_id:Number(this.$route.params.id)}).then(res => {
-          console.log(res);
           if(res){
             let d =new Date(res.data.zn_creattime*1000);
             res.data.zn_creattime=formatDate(d);
@@ -49,7 +47,7 @@
     padding: .5rem;
     .now_date {
       display: inline-block;
-      font-size: .8em;
+      font-size:1em;
       margin-bottom: .25rem;
     }
     .detail_content {

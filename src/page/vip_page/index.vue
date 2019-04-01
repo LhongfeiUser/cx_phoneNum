@@ -1,38 +1,66 @@
 <template>
-    <div class="vip_page">
-      <div class="header">
-        <div class="logo">
-          <img src="../../assets/images/logo.png" alt="">
-          <span>成易润通</span>
-        </div>
-        <div class="vip_login">
-          <span>hi~亮泽呀</span>
-        </div>
+  <div class="vip_page">
+    <div class="header">
+      <div class="logo">
+        <img src="../../assets/images/logo.png" alt="">
+        <span>成易润通</span>
       </div>
-      <ul class="resource">
-        <li>
-          <div class="resource_title">
-            <span><i></i>资源</span>
-          </div>
-          <div class="register">注册会员</div>
-          <div class="resource_bottom">
-            <span>666元/年</span>
-            <span>每天可以获得<i>66</i>个资源</span>
-            <mt-button type="primary" size="small" @click.native="">立即购买</mt-button>
-          </div>
-        </li>
-      </ul>
+      <div class="vip_login">
+        <span>hi~{{userName}}</span>
+      </div>
     </div>
+    <ul class="resource">
+      <li class="resource_title">
+        <span><i></i>优质资源</span>
+      </li>
+      <li v-for="(item,index) in resource" :key="index">
+        <span style="color:#17233d;">{{item.le_name}}会员</span>
+        <div class="register">
+          成为{{item.le_name}}会员,
+          获取更多资源
+        </div>
+        <div class="resource_bottom">
+          <span>{{item.le_money/100}}元/年</span>
+          <span>每天{{item.le_interval}}可以获得<i>{{item.le_number}}</i>个资源</span>
+          <mt-button type="primary" size="small" @click.native="buy_vip(item.le_id)">立即购买</mt-button>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "index"
+  import {getVip_info} from '@/api/get_home_data'
+  import cookie from 'js-cookie'
+  export default {
+    data() {
+      return {
+        resource: '',
+        userName:'',
+      }
+    },
+    created(){
+      this.getData();
+      if(cookie.get('userInfo')){
+        this.userName=JSON.parse(cookie.get('userInfo')).hy_nicheng
+      }
+    },
+    methods: {
+      getData() {
+        let vip_info_data = {};
+        getVip_info(vip_info_data).then(res => {
+          this.resource = res;
+        });
+      },
+      buy_vip(le_id){
+        this.$router.push(`/home/pay?le_id=${le_id}`)
+      }
     }
+  }
 </script>
 
 <style scoped lang="scss">
-  .vip_page{
+  .vip_page {
     .header {
       display: flex;
       justify-content: space-between;
@@ -54,10 +82,10 @@
         }
       }
       .vip_login {
-        span{
+        span {
           display: inline-block;
-          color:#1b61ff;
-          width:85px;
+          color: #1b61ff;
+          width: 85px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -67,30 +95,33 @@
     .resource {
       font-size: .8em;
       color: #515a6e;
-      li {
+      .resource_title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         background-color: #f8f8f9;
-        margin-top: 15px;
+        /*margin-top: 15px;*/
         padding: .25rem .24rem .3rem;
-        .resource_title {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          span {
-            color: #b6b6b6;
-          }
-          span:first-child {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #17233d;
-            i {
-              display: inline-block;
-              width: .08rem;
-              height: .25rem;
-              background: #555;
-              margin-right: .05rem;
-            }
+        span {
+          color: #b6b6b6;
+        }
+        span:first-child {
+          font-size: 1.3em;
+          font-weight: 600;
+          color: #17233d;
+          i {
+            display: inline-block;
+            width: .08rem;
+            height: .25rem;
+            background: #555;
+            margin-right: .05rem;
           }
         }
+      }
+      li {
+        background-color: #f8f8f9;
+        margin-bottom: 15px;
+        padding: .25rem .24rem .3rem;
         .register {
           margin: .55rem 0 .4rem;
         }

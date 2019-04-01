@@ -1,28 +1,6 @@
 <template>
   <div class="help_center">
     <main>
-      <!--<div class="nav_banner">
-        <ul>
-          <li>
-            <img src="../../assets/images/icon_01.png" alt="">
-            <span>注册礼包</span>
-          </li>
-          <li>
-            <img src="../../assets/images/icon_02.png" alt="">
-            <span>热门咨询</span>
-          </li>
-          <li>
-            <img src="../../assets/images/icon_03.png" alt="">
-            <span>安全资源</span>
-          </li>
-          <router-link to="/share">
-            <li>
-              <img src="../../assets/images/icon_04.png">
-              <span>推荐分享</span>
-            </li>
-          </router-link>
-        </ul>
-      </div>-->
       <mt-loadmore :bottom-method="loadBottomUse"
                    :bottomPullText='bottomText'
                    :bottom-all-loaded="allLoaded"
