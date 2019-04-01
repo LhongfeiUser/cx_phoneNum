@@ -110,6 +110,7 @@
         ul{
           display: flex;
           justify-content: space-around;
+          align-items: center;
           border-top:1px solid #888;
           padding:.25rem;
           li {

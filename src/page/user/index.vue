@@ -47,9 +47,7 @@
 </template>
 
 <script>
-  import cookie from 'js-cookie'
   import {get_userInfo} from '@/api/getUserInfo'
-
   export default {
     data() {
       return {
