@@ -11,12 +11,12 @@
     </div>
     <ul class="resource">
       <li class="resource_title">
-        <span><i></i>优质资源</span>
+        <span><i></i>会员等级列表</span>
       </li>
       <li v-for="(item,index) in resource" :key="index">
-        <span style="color:#17233d;">{{item.le_name}}会员</span>
+        <span class="more_member">{{item.le_name}}</span>
         <div class="register">
-          成为{{item.le_name}}会员,
+          成为{{item.le_name}},
           获取更多资源
         </div>
         <div class="resource_bottom">
@@ -95,6 +95,12 @@
     .resource {
       font-size: .8em;
       color: #515a6e;
+      .more_member{
+        color:#17233d;font-size: 1.2em;
+        font-weight: 600;
+        border-left: 5px solid;
+        padding-left: 5px;
+      }
       .resource_title {
         display: flex;
         justify-content: space-between;
@@ -123,7 +129,7 @@
         margin-bottom: 15px;
         padding: .25rem .24rem .3rem;
         .register {
-          margin: .55rem 0 .4rem;
+          margin: .2rem 0 .4rem;
         }
         .resource_bottom {
           display: flex;

@@ -1,6 +1,9 @@
 <template>
   <div class="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
     <mt-tabbar v-model="active" :fixed="true">
       <mt-tab-item id="home">
         <img slot="icon" src="../assets/images/home.png">

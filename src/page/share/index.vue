@@ -44,9 +44,9 @@
           await wx.config(JSON.parse(res.jssdkconfig));
           wx.ready(function () {  //需在用户可能点击分享按钮前就先调用
             let title = '成易润通';
-            let desc = '亮泽呀打啥字';
+            let desc = '垄断正在消亡，分享才是王道';
             let link = res.url;
-            let img = 'http://wimg.spriteapp.cn/ugc/2018/07/20/5b5176302ffdc_1.jpg';
+            let img = 'http://admin.bjcyrt.com.cn/public/static/public/img/logo.png';
             wx.updateAppMessageShareData({
               title: title, // 分享标题
               desc: desc, // 分享描述

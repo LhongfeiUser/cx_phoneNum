@@ -11,7 +11,6 @@
     </div>
     <main>
       <div class="banner">
-        <!---->
         <mt-swipe :show-indicators="false" style="height:180px;">
           <mt-swipe-item v-for="(item,index) in bannerArr" :key="index">
             <img :src="item.banner_tupian" height="280px">
@@ -51,7 +50,7 @@
       <ul class="resource">
         <li v-for="(item,index) in resource" :key="index">
           <div class="resource_title">
-            <span><i></i>{{item.le_name}}资源</span>
+            <span><i></i>{{item.le_name}}</span>
             <router-link to="/home/resource">
               <span style="font-size:1em;">更多</span>
             </router-link>
